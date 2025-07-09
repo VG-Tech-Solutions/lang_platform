@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String    @id @default(uuid()) // UUID - mesmo do Supabase Auth
+  email                String    @unique
+  name                 String
+  lang_native          String
+  is_premium           Boolean   @default(false)
+  stripe_customer_id   String?
+  subscription_status  String?
+  subscription_renewal DateTime?
+}
+
+model LangNative {
+  id           Int    @id @default(autoincrement())
+  lang_code    String
+  lang_name    String
+  native_title String
+  lang_flag    String
+  native_order Int
+}
+
+model LangLearn {
+  id          Int    @id @default(autoincrement())
+  lang_code   String
+  learn_code  String
+  learn_title String
+}
+
+model Translation {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  en    String
+  pt    String
+  es    String
+  fr    String
+  de    String
+  it    String
+  ru    String
+}
+
+model Lesson {
+  id               Int      @id @default(autoincrement())
+  lesson_title     String
+  lesson_order     Int
+  lesson_access    String   // público, premium, bloqueado, etc.
+
+  lesson_title_en  String
+  lesson_title_pt  String
+  lesson_title_es  String
+  lesson_title_fr  String
+  lesson_title_de  String
+  lesson_title_it  String
+  lesson_title_ru  String
+
+  contents         LessonContent[]
+}
+
+model LessonContent {
+  id               Int    @id @default(autoincrement())
+  lesson_id        Int
+  lesson           Lesson @relation(fields: [lesson_id], references: [id])
+  lesson_type      String
+  play_order       Int
+  podcast_language String
+
+  // Campos de áudio para todos os idiomas
+  audio_en         String?
+  audio_pt         String?
+  audio_es         String?
+  audio_fr         String?
+  audio_de         String?
+  audio_it         String?
+  audio_ru         String?
+
+  // Campos de texto para todos os idiomas
+  text_en          String?
+  text_pt          String?
+  text_es          String?
+  text_fr          String?
+  text_de          String?
+  text_it          String?
+  text_ru          String?
+}
