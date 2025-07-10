@@ -7,5 +7,6 @@ const routes = Router();
 routes.use('/users', userRoutes);
 routes.use('/auth', authRoutes);
 routes.use('/lang/native',languageRoutes)
+routes.use('/available',languageRoutes)
 
 export default routes;
