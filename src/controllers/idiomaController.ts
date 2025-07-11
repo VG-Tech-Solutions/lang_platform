@@ -33,7 +33,7 @@ export class LangNativeController {
   }
 
 
-  //idioma por parâmetro
+  
   async getAvailableLanguagesToLearn(req: Request, res: Response):Promise<void> {
     try {
       const langNativeCode = req.query.lang_native as string;
@@ -77,7 +77,53 @@ export class LangNativeController {
       });
     }
   }
+
+   async updateLangNative(req: Request, res: Response): Promise<void> {
+    try {
+      const { lang_code } = req.params;
+      const updateData = req.body;
+
+      if (!lang_code) {
+        res.status(400).json({
+          success: false,
+          data: null,
+          message: 'Código do idioma é obrigatório'
+        });
+        return;
+      }
+
+      // Validação básica dos dados de atualização
+      if (!updateData || Object.keys(updateData).length === 0) {
+        res.status(400).json({
+          success: false,
+          data: null,
+          message: 'Dados para atualização são obrigatórios'
+        });
+        return;
+      }
+
+      const result = await langNativeService.updateLangNative(lang_code, updateData);
+
+      if (result.success) {
+        res.status(200).json(result);
+      } else {
+        if (result.message === 'Idioma nativo não encontrado') {
+          res.status(404).json(result);
+        } else {
+          res.status(400).json(result);
+        }
+      }
+    } catch (error) {
+      console.error('Erro no controller ao atualizar idioma nativo:', error);
+      res.status(500).json({
+        success: false,
+        data: null,
+        message: 'Erro interno do servidor'
+      });
+    }
+  }
 }
+
 
 
 

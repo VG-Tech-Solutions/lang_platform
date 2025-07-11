@@ -8,5 +8,6 @@ routes.use('/users', userRoutes);
 routes.use('/auth', authRoutes);
 routes.use('/lang/native',languageRoutes)
 routes.use('/available',languageRoutes)
+routes.use("/:id", languageRoutes)
 
 export default routes;

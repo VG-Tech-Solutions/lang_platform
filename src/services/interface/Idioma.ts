@@ -107,4 +107,39 @@ export class LangNativeService {
       };
     }
   }
+  async updateLangNative(lang_code: string, updateData: Partial<LangNative>) {
+    try {
+      // Verifica se o idioma existe
+      const existingLang = await prisma.langNative.findUnique({
+        where: { lang_code }
+      });
+
+      if (!existingLang) {
+        return {
+          success: false,
+          data: null,
+          message: 'Idioma nativo não encontrado'
+        };
+      }
+
+      // Atualiza o idioma
+      const updatedLang = await prisma.langNative.update({
+        where: { lang_code },
+        data: updateData
+      });
+
+      return {
+        success: true,
+        data: updatedLang,
+        message: 'Idioma nativo atualizado com sucesso'
+      };
+    } catch (error) {
+      console.error('Erro ao atualizar idioma nativo:', error);
+      return {
+        success: false,
+        data: null,
+        message: 'Erro ao atualizar idioma nativo'
+      };
+    }
+  }
 }
