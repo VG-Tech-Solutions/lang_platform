@@ -5,8 +5,8 @@ import { LangNativeController } from '../controllers/idiomaController';
 const router = Router();
 const langNativeController = new LangNativeController();
 
-router.get('/lang/native', langNativeController.getAllLangNatives);
-
+router.get('/', langNativeController.getAllLangNatives);
+router.get('/lang',langNativeController.getAvailableLanguagesToLearn);
 
 
 
