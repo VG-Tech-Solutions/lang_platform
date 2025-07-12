@@ -1,5 +1,5 @@
-// src/services/langNativeService.ts
-import { PrismaClient } from '@prisma/client';
+ 
+ import { PrismaClient } from '../../generated/prisma';
 import { LangNative, LangLearn } from '../../generated/prisma';
 const prisma = new PrismaClient();
 

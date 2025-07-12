@@ -16,6 +16,7 @@ export class UserService {
           stripe_customer_id: userData.stripe_customer_id,
           subscription_status: userData.subscription_status,
           subscription_renewal: userData.subscription_renewal,
+          password: userData.password
         }
       })
 
@@ -89,7 +90,7 @@ export class UserService {
         where: { id },
         data: {
           ...updates,
-          updated_at: new Date()
+          
         }
       })
 
@@ -157,7 +158,8 @@ export class UserService {
         is_premium: false,
         stripe_customer_id: null,
         subscription_status: null,
-        subscription_renewal: null
+        subscription_renewal: null,
+         password: ''
       }
 
       const newUser = await this.createUser(userData)
@@ -185,7 +187,7 @@ export class UserService {
         take: limit,
         skip: offset,
         orderBy: {
-          created_at: 'desc'
+         
         }
       })
 
@@ -217,9 +219,7 @@ export class UserService {
         prisma.user.count({ where: { is_premium: true } }),
         prisma.user.count({ 
           where: { 
-            created_at: { 
-              gte: firstDayOfMonth 
-            } 
+           
           } 
         })
       ])

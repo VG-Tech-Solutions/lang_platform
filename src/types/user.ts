@@ -9,6 +9,7 @@ export interface User {
   subscription_renewal?: Date | null
   created_at?: Date
   updated_at?: Date
+  password: string
 }
 
 export interface AuthUser {
@@ -25,6 +26,7 @@ export interface AuthUser {
 export interface CreateUserRequest {
   email: string
   name: string
+  
   lang_native: string
 }
 
