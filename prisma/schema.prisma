@@ -77,7 +77,7 @@ model translation {
 }
 
 model user {
-  id                   String    @id
+  id                   Int @id @default(autoincrement())
   email                String    @unique(map: "User_email_key")
   name                 String
   lang_native          String
@@ -85,4 +85,5 @@ model user {
   stripe_customer_id   String?
   subscription_status  String?
   subscription_renewal DateTime?
+  password String
 }

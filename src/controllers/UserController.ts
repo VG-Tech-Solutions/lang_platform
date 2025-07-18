@@ -19,7 +19,13 @@ import { Request, Response } from 'express'
 import { supabase } from '../config/supabase'
 import { UserService } from '../services/interface/user'
 import logger from '../types/logger'
-
+import prisma from '../config/database' 
+interface AuthenticatedRequest extends Request {
+  user?: {
+    id: number
+    email: string
+  }
+}
 export class UserController {
   private userService: UserService
 
@@ -99,7 +105,93 @@ export class UserController {
   }
 
 
-  
+  async getProfile(req: AuthenticatedRequest, res: Response) {
+    try {
+      // Extrair ID do usuário do token JWT
+      const userId = req.user?.id
+      
+      if (!userId) {
+        logger.warn('Tentativa de acesso sem token válido')
+        return res.status(401).json({
+          success: false,
+          message: 'Token inválido ou ausente'
+        })
+      }
+
+      // Buscar usuário com informações do idioma nativo
+      const userWithLanguage = await prisma.user.findUnique({
+        where: { id: userId },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          lang_native: true,
+          is_premium: true,
+          subscription_status: true,
+          subscription_renewal: true
+        }
+      })
+
+      if (!userWithLanguage) {
+        logger.warn('Usuário não encontrado', { userId })
+        return res.status(404).json({
+          success: false,
+          message: 'Usuário não encontrado'
+        })
+      }
+
+      // Buscar informações detalhadas do idioma nativo
+      const languageDetails = await prisma.langnative.findUnique({
+        where: { lang_code: userWithLanguage.lang_native }
+      })
+
+      // Montar resposta com dados do usuário
+      const userProfile = {
+        id: userWithLanguage.id,
+        name: userWithLanguage.name,
+        email: userWithLanguage.email,
+        isPremium: userWithLanguage.is_premium,
+        nativeLanguage: languageDetails ? {
+          code: languageDetails.lang_code,
+          name: languageDetails.lang_name,
+          nativeTitle: languageDetails.native_title,
+          flag: languageDetails.lang_flag,
+          order: languageDetails.native_order
+        } : {
+          code: userWithLanguage.lang_native,
+          name: userWithLanguage.lang_native,
+          nativeTitle: userWithLanguage.lang_native,
+          flag: '',
+          order: 0
+        },
+        subscription: {
+          status: userWithLanguage.subscription_status,
+          renewal: userWithLanguage.subscription_renewal
+        }
+      }
+
+      logger.info('Perfil do usuário retornado com sucesso', { 
+        userId: userWithLanguage.id,
+        email: userWithLanguage.email 
+      })
+
+      return res.status(200).json({
+        success: true,
+        data: userProfile
+      })
+
+    } catch (error: any) {
+      logger.error('Erro ao buscar perfil do usuário:', {
+        error: error.message,
+        userId: req.user?.id
+      })
+
+      return res.status(500).json({
+        success: false,
+        message: 'Erro interno do servidor'
+      })
+    }
+  }
 
 
 }

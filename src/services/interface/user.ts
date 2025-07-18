@@ -2,13 +2,14 @@
 import prisma from '../../config/database'
 import { User } from '../../types/user'
 import logger from '../../types/logger'
-
+import bcrypt from 'bcrypt'
 export class UserService {
   async createUser(userData: Omit<User, 'created_at' | 'updated_at'>): Promise<User | null> {
     try {
+      const hashedPassword = await bcrypt.hash(userData.password, 10)
       const user = await prisma.user.create({
         data: {
-          id: userData.id,
+          
           email: userData.email,
           name: userData.name,
           lang_native: userData.lang_native,
@@ -16,7 +17,7 @@ export class UserService {
           stripe_customer_id: userData.stripe_customer_id,
           subscription_status: userData.subscription_status,
           subscription_renewal: userData.subscription_renewal,
-          password: userData.password
+          password: hashedPassword
         }
       })
 
@@ -44,7 +45,7 @@ export class UserService {
     }
   }
 
-  async getUserById(id: string): Promise<User | null> {
+  async getUserById(id: number): Promise<User | null> {
     try {
       const user = await prisma.user.findUnique({
         where: { id }
@@ -84,7 +85,7 @@ export class UserService {
     }
   }
 
-  async updateUser(id: string, updates: Partial<User>): Promise<User | null> {
+  async updateUser(id: number, updates: Partial<User>): Promise<User | null> {
     try {
       const user = await prisma.user.update({
         where: { id },
@@ -116,7 +117,7 @@ export class UserService {
     }
   }
 
-  async deleteUser(id: string): Promise<boolean> {
+  async deleteUser(id: number): Promise<boolean> {
     try {
       await prisma.user.delete({
         where: { id }
@@ -244,4 +245,142 @@ export class UserService {
       }
     }
   }
+
+
+async getUserProfileWithLanguage(id: number): Promise<{
+  id: number
+  name: string
+  email: string
+  isPremium: boolean
+  nativeLanguage: {
+    code: string
+    name: string
+    nativeTitle: string
+    flag: string
+    order: number
+  }
+  subscription: {
+    status: string | null
+    renewal: Date | null
+  }
+} | null> {
+  try {
+    // Buscar usuário com join do idioma nativo
+    const userWithLanguage = await prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        lang_native: true,
+        is_premium: true,
+        subscription_status: true,
+        subscription_renewal: true
+      }
+    })
+
+    if (!userWithLanguage) {
+      logger.warn('Usuário não encontrado para perfil', { userId: id })
+      return null
+    }
+
+    // Buscar detalhes do idioma nativo
+    const languageDetails = await prisma.langnative.findUnique({
+      where: { lang_code: userWithLanguage.lang_native }
+    })
+
+    // Montar resposta estruturada
+    const profile = {
+      id: userWithLanguage.id,
+      name: userWithLanguage.name,
+      email: userWithLanguage.email,
+      isPremium: userWithLanguage.is_premium,
+      nativeLanguage: languageDetails ? {
+        code: languageDetails.lang_code,
+        name: languageDetails.lang_name,
+        nativeTitle: languageDetails.native_title,
+        flag: languageDetails.lang_flag,
+        order: languageDetails.native_order
+      } : {
+        code: userWithLanguage.lang_native,
+        name: userWithLanguage.lang_native,
+        nativeTitle: userWithLanguage.lang_native,
+        flag: '',
+        order: 0
+      },
+      subscription: {
+        status: userWithLanguage.subscription_status,
+        renewal: userWithLanguage.subscription_renewal
+      }
+    }
+
+    logger.debug('Perfil do usuário montado com sucesso', { 
+      userId: id,
+      hasLanguageDetails: !!languageDetails
+    })
+
+    return profile
+
+  } catch (error: any) {
+    logger.error('Erro ao buscar perfil completo do usuário:', {
+      error: error.message,
+      userId: id
+    })
+    return null
+  }
+}
+
+// Método para listar todos os idiomas disponíveis
+async getAvailableLanguages(): Promise<{
+  code: string
+  name: string
+  nativeTitle: string
+  flag: string
+  order: number
+}[]> {
+  try {
+    const languages = await prisma.langnative.findMany({
+      orderBy: { native_order: 'asc' }
+    })
+
+    const formattedLanguages = languages.map(lang => ({
+      code: lang.lang_code,
+      name: lang.lang_name,
+      nativeTitle: lang.native_title,
+      flag: lang.lang_flag,
+      order: lang.native_order
+    }))
+
+    logger.debug('Idiomas disponíveis listados', { 
+      count: formattedLanguages.length 
+    })
+
+    return formattedLanguages
+
+  } catch (error: any) {
+    logger.error('Erro ao buscar idiomas disponíveis:', {
+      error: error.message
+    })
+    return []
+  }
+}
+
+// Método para validar se um idioma nativo existe
+async validateNativeLanguage(langCode: string): Promise<boolean> {
+  try {
+    const language = await prisma.langnative.findUnique({
+      where: { lang_code: langCode }
+    })
+
+    return !!language
+
+  } catch (error: any) {
+    logger.error('Erro ao validar idioma nativo:', {
+      error: error.message,
+      langCode
+    })
+    return false
+  }
+}
+
 }
