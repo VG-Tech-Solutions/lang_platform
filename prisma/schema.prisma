@@ -86,4 +86,11 @@ model user {
   subscription_status  String?
   subscription_renewal DateTime?
   password String
+
+
+  security_question      String?   
+  security_answer_hash   String?   
+  
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
 }

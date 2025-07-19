@@ -85,12 +85,16 @@ CREATE TABLE `user` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `email` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
-    `lang_native` VARCHAR(191) NOT NULL,
+    `lang_native` VARCHAR(191) NULL,
     `is_premium` BOOLEAN NOT NULL DEFAULT false,
     `stripe_customer_id` VARCHAR(191) NULL,
     `subscription_status` VARCHAR(191) NULL,
     `subscription_renewal` DATETIME(3) NULL,
     `password` VARCHAR(191) NOT NULL,
+    `security_question` VARCHAR(191) NULL,
+    `security_answer_hash` VARCHAR(191) NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
