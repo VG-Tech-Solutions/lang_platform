@@ -1,0 +1,24 @@
+{"error":"\nInvalid `prisma.user.create()` invocation:\n\n\nThe column `password` does not exist in the current database.","level":"error","message":"Erro ao criar usuário:","service":"backend-auth","timestamp":"2025-07-12 20:32:54","userData":{"email":"gustavo@example.com","id":"12345"}}
+{"email":"gustavo@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-12 20:50:32","userId":"12345"}
+{"email":"gustavo@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-12 21:12:41","userId":1}
+{"email":"johndoe@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-17 23:13:31","userId":2}
+{"level":"info","message":"Login com Google iniciado com sucesso","service":"backend-auth","timestamp":"2025-07-17 23:13:49"}
+{"email":"johndo@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-17 23:28:57","userId":3}
+{"level":"info","message":"Login com Google iniciado com sucesso","service":"backend-auth","timestamp":"2025-07-17 23:29:19"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Token não fornecido ou formato inválido","service":"backend-auth","timestamp":"2025-07-17 23:39:43","userAgent":"insomnia/11.3.0"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:42:02"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:43:49"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:43:56"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:48:02"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:56:33"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:59:49"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-18 00:00:35"}
+{"level":"warn","message":"Tentativa de acesso sem token válido","service":"backend-auth","timestamp":"2025-07-18 00:09:02"}
+{"error":"\nInvalid `prisma.user.findUnique()` invocation:\n\n\nCan't reach database server at `localhost:3306`\n\nPlease make sure your database server is running at `localhost:3306`.","level":"error","message":"Erro ao buscar perfil do usuário:","service":"backend-auth","timestamp":"2025-07-18 00:21:20","userId":3}
+{"email":"johndo@example.com","level":"info","message":"Perfil do usuário retornado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:21:24","userId":3}
+{"email":"johndo@example.com","level":"info","message":"Perfil do usuário retornado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:29:08","userId":3}
+{"email":"johnd@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:34:10","userId":4}
+{"email":"johnd@example.com","level":"info","message":"Perfil do usuário retornado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:35:31","userId":4}
+{"email":"john@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:40:18","userId":5}
+{"email":"john@example.com","level":"info","message":"Perfil do usuário retornado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:41:26","userId":5}
+{"level":"info","message":"Login com Google iniciado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:41:42"}

@@ -11,18 +11,25 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^6.10.1",
+    "@prisma/client": "^6.11.1",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/supabase-js": "^2.50.5",
     "bcrypt": "^6.0.0",
-    "dotenv": "^16.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "next": "^15.3.5",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^24.0.4",
-    "prisma": "^6.10.1",
+    "@types/node": "^24.0.13",
+    "@types/winston": "^2.4.4",
+    "prisma": "^6.11.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   }

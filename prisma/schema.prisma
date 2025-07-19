@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model langlearn {
+  id          Int    @id @default(autoincrement())
+  lang_code   String
+  learn_code  String
+  learn_title String
+}
+
+model langnative {
+  id           Int    @id @default(autoincrement())
+  lang_code    String @unique(map: "LangNative_lang_code_key")
+  lang_name    String
+  native_title String
+  lang_flag    String
+  native_order Int
+}
+
+model lesson {
+  id              Int             @id @default(autoincrement())
+  lesson_title    String
+  lesson_order    Int
+  lesson_access   String
+  lesson_title_en String
+  lesson_title_pt String
+  lesson_title_es String
+  lesson_title_fr String
+  lesson_title_de String
+  lesson_title_it String
+  lesson_title_ru String
+  lessoncontent   lessoncontent[]
+}
+
+model lessoncontent {
+  id               Int     @id @default(autoincrement())
+  lesson_id        Int
+  lesson_type      String
+  play_order       Int
+  podcast_language String
+  audio_en         String?
+  audio_pt         String?
+  audio_es         String?
+  audio_fr         String?
+  audio_de         String?
+  audio_it         String?
+  audio_ru         String?
+  text_en          String?
+  text_pt          String?
+  text_es          String?
+  text_fr          String?
+  text_de          String?
+  text_it          String?
+  text_ru          String?
+  lesson           lesson  @relation(fields: [lesson_id], references: [id], map: "LessonContent_lesson_id_fkey")
+
+  @@index([lesson_id], map: "LessonContent_lesson_id_fkey")
+}
+
+model translation {
+  id  Int    @id @default(autoincrement())
+  key String @unique(map: "Translation_key_key")
+  en  String
+  pt  String
+  es  String
+  fr  String
+  de  String
+  it  String
+  ru  String
+}
+
+model user {
+  id                   Int @id @default(autoincrement())
+  email                String    @unique(map: "User_email_key")
+  name                 String
+  lang_native          String
+  is_premium           Boolean   @default(false)
+  stripe_customer_id   String?
+  subscription_status  String?
+  subscription_renewal DateTime?
+  password String
+}
