@@ -603,10 +603,10 @@ async setSecurityQuestion(req: AuthenticatedRequest, res: Response): Promise<voi
         timestamp: new Date().toISOString()
       })
 
-      // Buscar pergunta de segurança no serviço
+      
       const securityData = await this.userService.getSecurityQuestionByEmail(email)
 
-      // Usuário não encontrado ou sem pergunta configurada
+     
       if (!securityData) {
         logger.warn('Tentativa de busca por pergunta - email não encontrado ou sem pergunta', { 
           email,
@@ -614,8 +614,7 @@ async setSecurityQuestion(req: AuthenticatedRequest, res: Response): Promise<voi
           timestamp: new Date().toISOString()
         })
 
-        // Por segurança, não revelamos se o usuário existe ou não
-        // Mantemos uma resposta genérica
+        
         res.status(404).json({
           success: false,
           error: 'Não foi possível localizar uma pergunta de segurança associada a este email. Verifique se:\n• O email está correto\n• Você possui uma conta cadastrada\n• Configurou uma pergunta de segurança',
@@ -628,7 +627,7 @@ async setSecurityQuestion(req: AuthenticatedRequest, res: Response): Promise<voi
         return
       }
 
-      // Sucesso - pergunta encontrada
+     
       logger.info('Pergunta de segurança localizada e enviada', { 
         email: securityData.email,
         questionLength: securityData.security_question.length,
@@ -669,7 +668,7 @@ async setSecurityQuestion(req: AuthenticatedRequest, res: Response): Promise<voi
         timestamp: new Date().toISOString()
       })
 
-      // Resposta de erro genérica para o cliente
+      
       res.status(500).json({
         success: false,
         error: 'Ocorreu um erro interno do servidor. Nossa equipe foi notificada e está trabalhando para resolver o problema.',
