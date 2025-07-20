@@ -94,3 +94,168 @@ model user {
   created_at             DateTime  @default(now())
   updated_at             DateTime  @updatedAt
 }
+
+
+
+
+
+
+
+model Campaign {
+  id          String   @id @default(cuid())
+  name        String
+  platform    Platform
+  status      CampaignStatus @default(ACTIVE)
+  
+  // Tags específicas para cada plataforma
+  googleAds   GoogleAdsTag?
+  metaAds     MetaAdsTag?
+  xAds        XAdsTag?
+  
+  // Tracking
+  events      Event[]
+  
+  // Metadados
+  startDate   DateTime?
+  endDate     DateTime?
+  budget      Float?
+  currency    String?   @default("BRL")
+  
+  // Auditoria
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String?
+  
+  @@map("campaigns")
+}
+
+model GoogleAdsTag {
+  id           String   @id @default(cuid())
+  campaignId   String   @unique
+  campaign     Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  // Tags específicas do Google Ads
+  gclid        String?  // Google Click Identifier
+  utm_source   String   @default("google")
+  utm_medium   String   @default("cpc")
+  utm_campaign String
+  utm_term     String?
+  utm_content  String?
+  
+  // IDs específicos do Google Ads
+  adGroupId    String?
+  keywordId    String?
+  creativeId   String?
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@map("google_ads_tags")
+}
+
+model MetaAdsTag {
+  id           String   @id @default(cuid())
+  campaignId   String   @unique
+  campaign     Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  // Tags específicas do Meta Ads
+  fbclid       String?  // Facebook Click Identifier
+  utm_source   String   @default("facebook")
+  utm_medium   String   @default("cpc")
+  utm_campaign String
+  utm_content  String?
+  
+  // IDs específicos do Meta
+  adSetId      String?
+  adId         String?
+  placement    String?  // feed, stories, etc.
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@map("meta_ads_tags")
+}
+
+model XAdsTag {
+  id           String   @id @default(cuid())
+  campaignId   String   @unique
+  campaign     Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  // Tags específicas do X Ads (Twitter)
+  twclid       String?  // Twitter Click Identifier
+  utm_source   String   @default("twitter")
+  utm_medium   String   @default("cpc")
+  utm_campaign String
+  utm_content  String?
+  
+  // IDs específicos do X
+  tweetId      String?
+  lineItemId   String?
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@map("x_ads_tags")
+}
+
+model Event {
+  id           String     @id @default(cuid())
+  campaignId   String?
+  campaign     Campaign?  @relation(fields: [campaignId], references: [id])
+  
+  // Dados do evento
+  eventName    String     // Ex: "subscribe_button_click", "purchase", "lead_form_submit"
+  eventAction  String?    // Ex: "click", "submit", "view"
+  eventCategory String?   // Ex: "engagement", "conversion", "navigation"
+  eventLabel   String?    // Ex: "header_subscribe", "footer_newsletter"
+  
+  // Valores para conversões
+  value        Float?
+  currency     String?    @default("BRL")
+  
+  // Dados do usuário/sessão
+  userId       String?
+  sessionId    String?
+  userAgent    String?
+  ipAddress    String?
+  
+  // Dados de rastreamento
+  utmSource    String?
+  utmMedium    String?
+  utmCampaign  String?
+  utmTerm      String?
+  utmContent   String?
+  
+  // Referrer
+  referrer     String?
+  
+  // Google Analytics
+  gaClientId   String?    // Google Analytics Client ID
+  ga4MeasurementId String? // GA4 Measurement ID
+  
+  // Dados da página
+  pageUrl      String?
+  pageTitle    String?
+  
+  // Timestamp
+  eventTime    DateTime   @default(now())
+  createdAt    DateTime   @default(now())
+  
+  @@map("events")
+  @@index([eventName])
+  @@index([campaignId])
+  @@index([eventTime])
+}
+
+enum Platform {
+  GOOGLE_ADS
+  META_ADS
+  X_ADS
+}
+
+enum CampaignStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  DRAFT
+}
