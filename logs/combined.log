@@ -1,0 +1,56 @@
+{"error":"\nInvalid `prisma.user.create()` invocation:\n\n\nThe column `password` does not exist in the current database.","level":"error","message":"Erro ao criar usuário:","service":"backend-auth","timestamp":"2025-07-12 20:32:54","userData":{"email":"gustavo@example.com","id":"12345"}}
+{"email":"gustavo@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-12 20:50:32","userId":"12345"}
+{"email":"gustavo@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-12 21:12:41","userId":1}
+{"email":"johndoe@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-17 23:13:31","userId":2}
+{"level":"info","message":"Login com Google iniciado com sucesso","service":"backend-auth","timestamp":"2025-07-17 23:13:49"}
+{"email":"johndo@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-17 23:28:57","userId":3}
+{"level":"info","message":"Login com Google iniciado com sucesso","service":"backend-auth","timestamp":"2025-07-17 23:29:19"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Token não fornecido ou formato inválido","service":"backend-auth","timestamp":"2025-07-17 23:39:43","userAgent":"insomnia/11.3.0"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:42:02"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:43:49"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:43:56"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:48:02"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:56:33"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-17 23:59:49"}
+{"level":"warn","message":"Token inválido - dados do usuário ausentes","service":"backend-auth","timestamp":"2025-07-18 00:00:35"}
+{"level":"warn","message":"Tentativa de acesso sem token válido","service":"backend-auth","timestamp":"2025-07-18 00:09:02"}
+{"error":"\nInvalid `prisma.user.findUnique()` invocation:\n\n\nCan't reach database server at `localhost:3306`\n\nPlease make sure your database server is running at `localhost:3306`.","level":"error","message":"Erro ao buscar perfil do usuário:","service":"backend-auth","timestamp":"2025-07-18 00:21:20","userId":3}
+{"email":"johndo@example.com","level":"info","message":"Perfil do usuário retornado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:21:24","userId":3}
+{"email":"johndo@example.com","level":"info","message":"Perfil do usuário retornado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:29:08","userId":3}
+{"email":"johnd@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:34:10","userId":4}
+{"email":"johnd@example.com","level":"info","message":"Perfil do usuário retornado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:35:31","userId":4}
+{"email":"john@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:40:18","userId":5}
+{"email":"john@example.com","level":"info","message":"Perfil do usuário retornado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:41:26","userId":5}
+{"level":"info","message":"Login com Google iniciado com sucesso","service":"backend-auth","timestamp":"2025-07-18 00:41:42"}
+{"email":"ohn@example.com","level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-18 21:25:23","userId":6}
+{"email":"usuario@email.com","ip":"::ffff:127.0.0.1","level":"info","message":"Solicitação de pergunta de segurança","service":"backend-auth","timestamp":"2025-07-19 16:52:02","userAgent":"insomnia/11.3.0"}
+{"email":"usuario@email.com","error":"\nInvalid `prisma.user.findUnique()` invocation:\n\n\nThe column `banco_languag4.user.security_question` does not exist in the current database.","level":"error","message":"Erro ao buscar pergunta de segurança:","service":"backend-auth","timestamp":"2025-07-19 16:52:05"}
+{"email":"usuario@email.com","ip":"::ffff:127.0.0.1","level":"warn","message":"Tentativa de recuperação com email não cadastrado ou sem pergunta","service":"backend-auth","timestamp":"2025-07-19 16:52:05"}
+{"email":"gustavo@example.com","ip":"::ffff:127.0.0.1","level":"info","message":"Solicitação de pergunta de segurança","service":"backend-auth","timestamp":"2025-07-19 16:52:35","userAgent":"insomnia/11.3.0"}
+{"email":"gustavo@example.com","error":"\nInvalid `prisma.user.findUnique()` invocation:\n\n\nThe column `banco_languag4.user.security_question` does not exist in the current database.","level":"error","message":"Erro ao buscar pergunta de segurança:","service":"backend-auth","timestamp":"2025-07-19 16:52:35"}
+{"email":"gustavo@example.com","ip":"::ffff:127.0.0.1","level":"warn","message":"Tentativa de recuperação com email não cadastrado ou sem pergunta","service":"backend-auth","timestamp":"2025-07-19 16:52:35"}
+{"email":"gustavo@example.com","ip":"::ffff:127.0.0.1","level":"info","message":"Solicitação de pergunta de segurança","service":"backend-auth","timestamp":"2025-07-19 16:56:25","userAgent":"insomnia/11.3.0"}
+{"email":"gustavo@example.com","level":"warn","message":"Usuário não encontrado para recuperação","service":"backend-auth","timestamp":"2025-07-19 16:56:26"}
+{"email":"gustavo@example.com","ip":"::ffff:127.0.0.1","level":"warn","message":"Tentativa de recuperação com email não cadastrado ou sem pergunta","service":"backend-auth","timestamp":"2025-07-19 16:56:26"}
+{"email":"gustavo@example.com","ip":"::ffff:127.0.0.1","level":"info","message":"Solicitação de pergunta de segurança","service":"backend-auth","timestamp":"2025-07-19 16:59:40","userAgent":"insomnia/11.3.0"}
+{"email":"gustavo@example.com","level":"warn","message":"Usuário não encontrado para recuperação","service":"backend-auth","timestamp":"2025-07-19 16:59:42"}
+{"email":"gustavo@example.com","ip":"::ffff:127.0.0.1","level":"warn","message":"Tentativa de recuperação com email não cadastrado ou sem pergunta","service":"backend-auth","timestamp":"2025-07-19 16:59:42"}
+{"error":"\nInvalid `prisma.user.create()` invocation:\n\n{\n  data: {\n    email: \"gustavo@example.com\",\n    name: \"Gustavo Costa\",\n    is_premium: undefined,\n    stripe_customer_id: undefined,\n    subscription_status: undefined,\n    subscription_renewal: undefined,\n    password: \"$2b$10$4UK.V7.mbQ1cESei5p3mI.93bw1F/aV1ZwbqlLsE7Vx8JFaMH3F.q\",\n    security_question: undefined,\n    security_answer_hash: null,\n+   lang_native: String\n  }\n}\n\nArgument `lang_native` is missing.","level":"error","message":"Erro ao criar usuário:","service":"backend-auth","timestamp":"2025-07-19 17:00:00","userData":{"email":"gustavo@example.com"}}
+{"email":"ohn@example.com","hasSecurityQuestion":false,"level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-19 17:05:51","userId":1}
+{"email":"ohn@example.com","ip":"::ffff:127.0.0.1","level":"info","message":"Solicitação de pergunta de segurança","service":"backend-auth","timestamp":"2025-07-19 17:06:12","userAgent":"insomnia/11.3.0"}
+{"email":"ohn@example.com","level":"warn","message":"Usuário não possui pergunta de segurança configurada","service":"backend-auth","timestamp":"2025-07-19 17:06:12"}
+{"email":"ohn@example.com","ip":"::ffff:127.0.0.1","level":"warn","message":"Tentativa de recuperação com email não cadastrado ou sem pergunta","service":"backend-auth","timestamp":"2025-07-19 17:06:12"}
+{"email":"ohn@example.com","ip":"::ffff:127.0.0.1","level":"info","message":"Solicitação de pergunta de segurança","service":"backend-auth","timestamp":"2025-07-19 17:06:38","userAgent":"insomnia/11.3.0"}
+{"email":"ohn@example.com","level":"warn","message":"Usuário não possui pergunta de segurança configurada","service":"backend-auth","timestamp":"2025-07-19 17:06:39"}
+{"email":"ohn@example.com","ip":"::ffff:127.0.0.1","level":"warn","message":"Tentativa de recuperação com email não cadastrado ou sem pergunta","service":"backend-auth","timestamp":"2025-07-19 17:06:39"}
+{"email":"john@example.com","hasSecurityQuestion":false,"level":"info","message":"Usuário criado com sucesso","service":"backend-auth","timestamp":"2025-07-19 17:07:02","userId":2}
+{"email":"john@example.com","ip":"::ffff:127.0.0.1","level":"info","message":"Solicitação de pergunta de segurança","service":"backend-auth","timestamp":"2025-07-19 17:07:33","userAgent":"insomnia/11.3.0"}
+{"email":"john@example.com","level":"warn","message":"Usuário não possui pergunta de segurança configurada","service":"backend-auth","timestamp":"2025-07-19 17:07:33"}
+{"email":"john@example.com","ip":"::ffff:127.0.0.1","level":"warn","message":"Tentativa de recuperação com email não cadastrado ou sem pergunta","service":"backend-auth","timestamp":"2025-07-19 17:07:33"}
+{"error":"invalid signature","ip":"::ffff:127.0.0.1","level":"error","message":"Erro na validação do token:","name":"JsonWebTokenError","service":"backend-auth","timestamp":"2025-07-19 17:37:54","userAgent":"insomnia/11.3.0"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"Configuração de pergunta de segurança","service":"backend-auth","timestamp":"2025-07-19 17:38:49","userId":2}
+{"email":"john@example.com","level":"info","message":"Pergunta de segurança configurada","service":"backend-auth","timestamp":"2025-07-19 17:38:50","userId":2}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"Pergunta de segurança configurada com sucesso","service":"backend-auth","timestamp":"2025-07-19 17:38:50","userId":2}
+{"email":"john@example.com","ip":"::ffff:127.0.0.1","level":"info","message":"Tentativa de redefinição de senha","service":"backend-auth","timestamp":"2025-07-19 17:46:14","userAgent":"insomnia/11.3.0"}
+{"email":"john@example.com","level":"info","message":"Senha redefinida com sucesso via pergunta de segurança","service":"backend-auth","timestamp":"2025-07-19 17:46:15","userId":2}
+{"email":"john@example.com","ip":"::ffff:127.0.0.1","level":"info","message":"Senha redefinida com sucesso","service":"backend-auth","timestamp":"2025-07-19 17:46:15"}
